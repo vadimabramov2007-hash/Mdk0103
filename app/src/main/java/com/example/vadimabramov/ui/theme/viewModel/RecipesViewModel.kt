@@ -1,9 +1,10 @@
-package com.example.vadimabramov.services
+package com.example.vadimabramov.ui.theme.viewModel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vadimabramov.data.Recipe
+import com.example.vadimabramov.data.RetrofitClient
+import com.example.vadimabramov.data.model.Recipe
 import kotlinx.coroutines.launch
 
 class RecipesViewModel: ViewModel() {

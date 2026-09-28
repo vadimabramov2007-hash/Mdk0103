@@ -1,6 +1,6 @@
-package com.example.vadimabramov.services
+package com.example.vadimabramov.data.service
 
-import com.example.vadimabramov.data.ProductsRespone
+import com.example.vadimabramov.data.model.ProductsRespone
 import retrofit2.http.GET
 
 interface ProductInteface {

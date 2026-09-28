@@ -4,18 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.vadimabramov.data.Recipe
-import com.example.vadimabramov.services.ProductViewModel
-import com.example.vadimabramov.services.RecipesViewModel
-import com.example.vadimabramov.ui.theme.VadimAbramovTheme
+import com.example.vadimabramov.data.model.Company
+import com.example.vadimabramov.data.model.Recipe
+import com.example.vadimabramov.data.model.User
+import com.example.vadimabramov.ui.theme.viewModel.ProductViewModel
+import com.example.vadimabramov.ui.theme.viewModel.RecipesViewModel
+import com.example.vadimabramov.ui.theme.viewModel.UserViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,28 +18,41 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             //Практическая работа 1
-          val productViewModel: ProductViewModel = viewModel()
-          productViewModel.fetchProducts()
+//          val productViewModel: ProductViewModel = viewModel()
+//          productViewModel.fetchProducts()
+//
+//
+//            //Практическая работа 2
+//            val recipesViewModel: RecipesViewModel = viewModel()
+//            val recipe = Recipe(
+//                name = "Запеченный лосось в лимонно-горчичном маринаде",
+//                ingredients = listOf(
+//                    "Стейк или филе лосося",
+//                    "лимонный сок",
+//                    "горчица дижонская",
+//                    "оливковое масло",
+//                    "мед",
+//                    "чеснок",
+//                    "соль",
+//                    "свежемолотый черный перец"
+//                ),
+//                difficulty = "Легкая",
+//                caloriesPerServing = 420
+//            )
+//            recipesViewModel.createRecipe(recipe)
 
+            val  userViewModel: UserViewModel = viewModel()
+            userViewModel.fetchUser(89)
 
-            //Практическая работа 2
-            val recipesViewModel: RecipesViewModel = viewModel()
-            val recipe = Recipe(
-                name = "Запеченный лосось в лимонно-горчичном маринаде",
-                ingredients = listOf(
-                    "Стейк или филе лосося",
-                    "лимонный сок",
-                    "горчица дижонская",
-                    "оливковое масло",
-                    "мед",
-                    "чеснок",
-                    "соль",
-                    "свежемолотый черный перец"
-                ),
-                difficulty = "Легкая",
-                caloriesPerServing = 420
+            val user = User(
+                firstName = "Олег",
+                lastName = "Павлов",
+                company = Company(
+                    name = "Интел",
+                    title = "Менеджер по продажам"
+                )
             )
-            recipesViewModel.createRecipe(recipe)
+            userViewModel.updateUser(89, user)
             }
         }
     }

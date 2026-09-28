@@ -1,4 +1,4 @@
-package com.example.vadimabramov.data
+package com.example.vadimabramov.data.model
 
 data class Recipe(
     val id: Int? = null,
