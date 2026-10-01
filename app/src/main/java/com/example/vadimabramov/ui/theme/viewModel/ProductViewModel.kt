@@ -10,7 +10,7 @@ class ProductViewModel: ViewModel() {
     fun fetchProducts(){
         viewModelScope.launch {
             try {
-                val productsResponse = RetrofitClient.productsApi.getAllProducts()
+                val productsResponse = RetrofitClient.productApi.getAllProducts()
                 val products = productsResponse.products
                 for (product in products){
                     Log.d("ProductViewModel", "Название - ${product.title}  " + "Рейтинг - ${product.rating}  "+ "Бренд - ${product.brand}")

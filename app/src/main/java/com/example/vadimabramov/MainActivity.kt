@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
 //            val  userViewModel: UserViewModel = viewModel()
 //            userViewModel.fetchUser(89)
 
+            //Практическая работа 3
             val productViewModel : ProductsViewModel = viewModel()
             productViewModel.deleteProductById(12)
             }

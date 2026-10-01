@@ -15,13 +15,12 @@ class UserViewModel : ViewModel() {
             try {
                 val user = RetrofitClient.userApi.getUser(userID)
 
-                Log.d("UserViewModel: fetchUser", """
-                    ДО -----> Идентификатор -> ${user.id}
-                    Имя -> ${user.firstName}
-                    Фамилия -> ${user.lastName}
-                    Название компании -> ${user.company.name}
-                    Должность -> ${user.company.title}
-                """.trimIndent())
+                Log.d("UserViewModel: fetchUser", "" +
+                        "ДО -----> Идентификатор -> ${user.id}\n" +
+                        "Фамилия -> ${user.lastName}\n" +
+                        "Название компании -> ${user.company.name}\n" +
+                        "Должность -> ${user.company.title}\n" +
+                        "")
 
                 val newUser = user.copy(
                     firstName = "Олег",
@@ -34,13 +33,12 @@ class UserViewModel : ViewModel() {
 
                 val response = RetrofitClient.userApi.updateUser(userID, newUser)
 
-                Log.d("UserViewModel: fetchUser", """
-                    ПОСЛЕ -----> Идентификатор -> ${response.id}
-                    Имя -> ${response.firstName}
-                    Фамилия -> ${response.lastName}
-                    Название компании -> ${response.company.name}
-                    Должность -> ${response.company.title}
-                """.trimIndent())
+                Log.d("UserViewModel: fetchUser", "" +
+                        "ДО -----> Идентификатор -> ${user.id}\n" +
+                        "Фамилия -> ${user.lastName}\n" +
+                        "Название компании -> ${user.company.name}\n" +
+                        "Должность -> ${user.company.title}\n" +
+                        "")
 
             } catch (ex: Exception) {
                 Log.e("UserViewModel: fetchUser", "Ошибка при обновлении пользователя", ex)
