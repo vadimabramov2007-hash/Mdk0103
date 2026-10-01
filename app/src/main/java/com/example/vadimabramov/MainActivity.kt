@@ -9,6 +9,7 @@ import com.example.vadimabramov.data.model.Company
 import com.example.vadimabramov.data.model.Recipe
 import com.example.vadimabramov.data.model.User
 import com.example.vadimabramov.ui.theme.viewModel.ProductViewModel
+import com.example.vadimabramov.ui.theme.viewModel.ProductsViewModel
 import com.example.vadimabramov.ui.theme.viewModel.RecipesViewModel
 import com.example.vadimabramov.ui.theme.viewModel.UserViewModel
 
@@ -42,8 +43,11 @@ class MainActivity : ComponentActivity() {
 //            recipesViewModel.createRecipe(recipe)
 
             //Практическая работа 3
-            val  userViewModel: UserViewModel = viewModel()
-            userViewModel.fetchUser(89)
+//            val  userViewModel: UserViewModel = viewModel()
+//            userViewModel.fetchUser(89)
+
+            val productViewModel : ProductsViewModel = viewModel()
+            productViewModel.deleteProductById(12)
             }
         }
     }

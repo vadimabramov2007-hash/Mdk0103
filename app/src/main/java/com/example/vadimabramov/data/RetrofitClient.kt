@@ -1,6 +1,7 @@
 package com.example.vadimabramov.data
 
 import com.example.vadimabramov.data.service.ProductInteface
+import com.example.vadimabramov.data.service.ProductsInterface
 import com.example.vadimabramov.data.service.RecipesInterface
 import com.example.vadimabramov.data.service.UserInterface
 import okhttp3.OkHttpClient
@@ -31,4 +32,5 @@ object RetrofitClient {
     val productsApi: ProductInteface = retrofit.create(ProductInteface::class.java)
     val recipeApi: RecipesInterface = retrofit.create(RecipesInterface::class.java)
     val userApi: UserInterface = retrofit.create(UserInterface::class.java)
+    val productApi: ProductsInterface = retrofit.create(ProductsInterface::class.java)
 }
