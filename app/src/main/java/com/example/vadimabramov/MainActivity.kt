@@ -41,18 +41,9 @@ class MainActivity : ComponentActivity() {
 //            )
 //            recipesViewModel.createRecipe(recipe)
 
+            //Практическая работа 3
             val  userViewModel: UserViewModel = viewModel()
             userViewModel.fetchUser(89)
-
-            val user = User(
-                firstName = "Олег",
-                lastName = "Павлов",
-                company = Company(
-                    name = "Интел",
-                    title = "Менеджер по продажам"
-                )
-            )
-            userViewModel.updateUser(89, user)
             }
         }
     }

@@ -4,40 +4,47 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vadimabramov.data.RetrofitClient
+import com.example.vadimabramov.data.model.Company
 import com.example.vadimabramov.data.model.User
 import kotlinx.coroutines.launch
 
-class UserViewModel: ViewModel() {
-    fun fetchUser(userID: Int){
-        viewModelScope.launch{
-            try {
-                val getUser = RetrofitClient.userApi.getUser(userID)
-                val userCompany = getUser.company
-                Log.d("UserViewModel: fetchUser",
-                    "ДО -----> Идентификатор -> ${getUser.id}\n"+
-                            "Имя -> ${getUser.firstName}\n" +
-                            "Фамилия -> ${getUser.lastName}\n" +
-                            "Название компании -> ${userCompany.name}\n" +
-                            "Должность -> ${userCompany.title}\n")
-            } catch (ex: Exception){
-                Log.e("UserViewModel: fetchUser", ex.message.toString()) }
-        }
-    }
+class UserViewModel : ViewModel() {
 
-
-    fun updateUser(userID: Int, user: User){
+    fun fetchUser(userID: Int) {
         viewModelScope.launch {
             try {
-                val response = RetrofitClient.userApi.updateUser(userID,user)
-                val userCompany = response.company
-                Log.d("UserViewModel: fetchUser",
-                    "ПОСЛЕ -----> Идентификатор -> ${response.id}\n"+
-                            "Имя -> ${response.firstName}\n" +
-                            "Фамилия -> ${response.lastName}\n" +
-                            "Название компании -> ${userCompany.name}\n" +
-                            "Должность -> ${userCompany.title}\n")
-            } catch (ex: Exception){
-                Log.e("UserViewModel: fetchUser", ex.message.toString()) }
+                val user = RetrofitClient.userApi.getUser(userID)
+
+                Log.d("UserViewModel: fetchUser", """
+                    ДО -----> Идентификатор -> ${user.id}
+                    Имя -> ${user.firstName}
+                    Фамилия -> ${user.lastName}
+                    Название компании -> ${user.company.name}
+                    Должность -> ${user.company.title}
+                """.trimIndent())
+
+                val newUser = user.copy(
+                    firstName = "Олег",
+                    lastName = "Павлов",
+                    company = Company(
+                        name = "Интел",
+                        title = "Менеджер по продажам"
+                    )
+                )
+
+                val response = RetrofitClient.userApi.updateUser(userID, newUser)
+
+                Log.d("UserViewModel: fetchUser", """
+                    ПОСЛЕ -----> Идентификатор -> ${response.id}
+                    Имя -> ${response.firstName}
+                    Фамилия -> ${response.lastName}
+                    Название компании -> ${response.company.name}
+                    Должность -> ${response.company.title}
+                """.trimIndent())
+
+            } catch (ex: Exception) {
+                Log.e("UserViewModel: fetchUser", "Ошибка при обновлении пользователя", ex)
+            }
         }
     }
 }
