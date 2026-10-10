@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vadimabramov.data.model.AuthRequest
 import com.example.vadimabramov.data.model.Company
 import com.example.vadimabramov.data.model.Recipe
 import com.example.vadimabramov.data.model.User
+import com.example.vadimabramov.ui.theme.viewModel.AuthViewModel
 import com.example.vadimabramov.ui.theme.viewModel.ProductViewModel
 import com.example.vadimabramov.ui.theme.viewModel.ProductsViewModel
 import com.example.vadimabramov.ui.theme.viewModel.RecipesViewModel
@@ -46,9 +48,17 @@ class MainActivity : ComponentActivity() {
 //            val  userViewModel: UserViewModel = viewModel()
 //            userViewModel.fetchUser(89)
 
-            //Практическая работа 3
-            val productViewModel : ProductsViewModel = viewModel()
-            productViewModel.deleteProductById(12)
+            //Практическая работа 4
+//            val productViewModel : ProductsViewModel = viewModel()
+//            productViewModel.deleteProductById(12)
+
+            //Практическая работа 5
+            val authViewModel: AuthViewModel = viewModel()
+            val loginUser = AuthRequest(
+                identity = "vadimadramov@gmail.com",
+                password = "123456789"
+            )
+            authViewModel.login(loginUser)
             }
         }
     }

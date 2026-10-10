@@ -1,6 +1,8 @@
 package com.example.vadimabramov.data
 
+import com.example.vadimabramov.data.service.AuthInterface
 import com.example.vadimabramov.data.service.ProductInteface
+import com.example.vadimabramov.data.service.RECIPEInterface
 import com.example.vadimabramov.data.service.RecipesInterface
 import com.example.vadimabramov.data.service.UserInterface
 import okhttp3.OkHttpClient
@@ -28,7 +30,16 @@ object RetrofitClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+    var retrofitSwagger: Retrofit = Retrofit.Builder()
+        .baseUrl("http://10.207.106.59:8090/api/collections/")
+        .client(okHttpClient)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
     val productApi: ProductInteface = retrofit.create(ProductInteface::class.java)
     val recipeApi: RecipesInterface = retrofit.create(RecipesInterface::class.java)
     val userApi: UserInterface = retrofit.create(UserInterface::class.java)
+
+    val authAPI: AuthInterface = retrofitSwagger.create(AuthInterface::class.java)
+    val recipesAPI: RECIPEInterface = retrofitSwagger.create(RECIPEInterface::class.java)
 }
