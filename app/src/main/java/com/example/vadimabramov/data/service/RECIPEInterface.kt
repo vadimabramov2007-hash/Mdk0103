@@ -7,6 +7,6 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface RECIPEInterface {
-    @GET("/recipes/records")
-    suspend fun getRecipes(@Header ("Autorization") token: String) : ItemsRecipe
+    @GET("recipes/records")
+    suspend fun getRecipes(@Header ("Authorization") token: String) : ItemsRecipe
 }

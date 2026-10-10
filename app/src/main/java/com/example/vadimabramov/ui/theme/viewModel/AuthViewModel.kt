@@ -17,14 +17,17 @@ class AuthViewModel : ViewModel() {
 
                 val token = authUser.token
                 if (!token.isNullOrEmpty()) {
-                    val Recipe = RetrofitClient.recipesAPI.getRecipes(token)
+                    val recipe = RetrofitClient.recipesAPI.getRecipes(token)
+                    Log.d("AuthViewModel", "items:")
+                    for (item in recipe.items) {
+                        Log.d("AuthViewModel", "  ${item.name}, ${item.difficulty}")
+                    }
                     Log.d(
                         "AuthViewModel",
-                        "items: ${Recipe.items}\n" +
-                                "page: ${Recipe.page}\n" +
-                                "perPage: ${Recipe.perPage}\n" +
-                                "totalItems: ${Recipe.totalItems}\n" +
-                                "totalPages: ${Recipe.totalPages}",
+                        "page: ${recipe.page}\n" +
+                                "perPage: ${recipe.perPage}\n" +
+                                "totalItems: ${recipe.totalItems}\n" +
+                                "totalPages: ${recipe.totalPages}"
                     )
                 }
             } catch (ex: Exception) {
