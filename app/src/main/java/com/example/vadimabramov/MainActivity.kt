@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.vadimabramov.data.TokenManager
 import com.example.vadimabramov.data.model.AuthRequest
 import com.example.vadimabramov.data.model.Company
 import com.example.vadimabramov.data.model.Recipe
@@ -12,6 +16,7 @@ import com.example.vadimabramov.data.model.User
 import com.example.vadimabramov.ui.theme.viewModel.AuthViewModel
 import com.example.vadimabramov.ui.theme.viewModel.ProductViewModel
 import com.example.vadimabramov.ui.theme.viewModel.ProductsViewModel
+import com.example.vadimabramov.ui.theme.viewModel.RecipeViewModel
 import com.example.vadimabramov.ui.theme.viewModel.RecipesViewModel
 import com.example.vadimabramov.ui.theme.viewModel.UserViewModel
 
@@ -53,12 +58,38 @@ class MainActivity : ComponentActivity() {
 //            productViewModel.deleteProductById(12)
 
             //Практическая работа 5
-            val authViewModel: AuthViewModel = viewModel()
+//            val authViewModel: AuthViewModel = viewModel()
+//            val loginUser = AuthRequest(
+//                identity = "vadimadramov@gmail.com",
+//                password = "123456789"
+//            )
+//            authViewModel.login(loginUser)
+
+            //Практическая работа 6
+            val tokenManager = TokenManager(applicationContext)
+
+            val todoViewModel: RecipeViewModel by viewModels {
+                viewModelFactory {
+                    initializer {
+                        RecipeViewModel(tokenManager)
+                    }
+                }
+            }
+
+            val authViewModel: AuthViewModel by viewModels {
+                viewModelFactory {
+                    initializer {
+                        AuthViewModel(tokenManager, todoViewModel)
+                    }
+                }
+            }
+
             val loginUser = AuthRequest(
                 identity = "vadimadramov@gmail.com",
                 password = "123456789"
             )
             authViewModel.login(loginUser)
+            todoViewModel.fetch()
             }
         }
     }
