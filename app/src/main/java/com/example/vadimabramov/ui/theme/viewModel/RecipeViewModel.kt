@@ -17,7 +17,7 @@ class RecipeViewModel(private val tokenManager: TokenManager) : ViewModel() {
                 if (!token.isNullOrEmpty()) {
                     val recipe = RetrofitClient.recipesAPI.getRecipes(token)
                     val items = recipe.items
-                    if (items != null) {
+
                         for (item in items) {
                             Log.d(
                                 "RecipeViewModel",
@@ -28,7 +28,7 @@ class RecipeViewModel(private val tokenManager: TokenManager) : ViewModel() {
                                         "updated: ${item.updated}",
                             )
                         }
-                    }
+
                     Log.d(
                         "RecipeViewModel",
                         "page: ${recipe.page}\n" +

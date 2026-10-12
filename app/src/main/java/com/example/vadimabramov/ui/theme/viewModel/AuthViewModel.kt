@@ -17,18 +17,18 @@ class AuthViewModel(
         viewModelScope.launch {
             try {
                 val authUser = RetrofitClient.authAPI.authentication(authRequest)
-                Log.d("LoginViewModel", "User: ${authUser.token} ${authUser.record}")
-                Log.d("LoginViewModel", "Responses: ${authUser.token} ${authUser.record}")
+                Log.d("AuthViewModel", "User: ${authUser.token} ${authUser.record}")
+                Log.d("AuthViewModel", "Responses: ${authUser.token} ${authUser.record}")
 
-                authUser.token?.let { token ->
-                    writeToken(token)
+
+                    writeToken(authUser.token)
                     todoViewModel.fetch()
-                }
 
-                val records = RetrofitClient.recipesAPI.getRecipes("${authUser.token}")
+
+                val records = RetrofitClient.recipesAPI.getRecipes(authUser.token)
 
                 Log.d(
-                    "LoginViewModel",
+                    "AuthViewModel",
                     "items: ${records.items}\n" +
                             "page: ${records.page}\n" +
                             "perPage: ${records.perPage}\n" +
@@ -36,7 +36,7 @@ class AuthViewModel(
                             "totalPages: ${records.totalPages}",
                 )
             } catch (ex: Exception) {
-                Log.e("LoginViewModel", ex.message ?: "", ex)
+                Log.e("AuthViewModel", ex.message ?: "", ex)
             }
         }
     }
